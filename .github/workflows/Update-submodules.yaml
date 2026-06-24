@@ -1,0 +1,18 @@
+name: Update submodules
+
+on:
+  schedule:
+    - cron: '8 20 * * *'   
+  workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+  update:
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: runsascoded/update-submodules@gha0.0.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
